@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Contents</title>
+</head>
+<body>
+<h1>게시판 리스트 </h1>
+<ol>
+    <li th:each="board : ${board}">
+        <a th:href="@{/board/{id}(id=${board.id})}" th:text="${board.title}">board Title</a>
+    </li>
+</ol>
+
+</body>
+</html>
