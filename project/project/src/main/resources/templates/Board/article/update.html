@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>게시물 수정</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>게시물 수정</h2>
+    <form th:action="@{/boards/article/{id}/update(id=${article.id})}" method="post" class="form-group">
+        <input type="hidden" name="id" th:value="${article.id}" />
+        <input type="text" name="title" placeholder="제목" required class="form-control mb-2" th:value="${article.title}">
+        <select id="boardType" name="category" class="form-control mb-2" th:selected="${article.category}">
+            <option value="자유게시판">자유 게시판</option>
+            <option value="개발게시판">개발 게시판</option>
+            <option value="일상게시판">일상 게시판</option>
+            <option value="사건사고게시판">사건사고 게시판</option>
+        </select>
+        <input type="password" name="password" placeholder="비밀번호" required class="form-control mb-2">
+        <textarea name="context" placeholder="내용" required class="form-control mb-2" th:text="${article.context}"></textarea>
+        <button type="submit" class="btn btn-primary">수정하기</button>
+    </form>
+    <a href="http://localhost:8080/boards/article/all" class="btn btn-secondary mt-3">전체 게시물 보기</a>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

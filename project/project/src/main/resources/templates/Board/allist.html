@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>게시판 목록</h2>
+    <div class="mb-3">
+        <a th:href="@{/boards/article/all}" class="btn btn-info">전체 게시판</a>
+        <a th:href="@{/boards/article/all(category='자유게시판')}" class="btn btn-info">자유 게시판</a>
+        <a th:href="@{/boards/article/all(category='개발게시판')}" class="btn btn-info">개발 게시판</a>
+        <a th:href="@{/boards/article/all(category='일상게시판')}" class="btn btn-info">일상 게시판</a>
+        <a th:href="@{/boards/article/all(category='사건사고게시판')}" class="btn btn-info">사건사고 게시판</a>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" th:each="board : ${board}">
+            <a th:href="@{/boards/article/{id}(id=${board.id})}" class="text-decoration-none">
+                <h5 th:text="${board.title}">게시물 제목</h5>
+                <p>카테고리: <span th:text="${board.category}"></span></p>
+            </a>
+        </li>
+    </ul>
+    <a href="http://localhost:8080/boards/article" class="btn btn-primary mt-4">새 게시물 작성하기</a>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 상세</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 th:text="${board.title}">게시판 제목</h1>
+    <p>내용: <span th:text="${board.context}"></span></p>
+    <p>카테고리: <span th:text="${board.category}"></span></p>
+
+    <div class="d-flex justify-content-between">
+        <form method="post">
+            <input type="password" name="password" placeholder="비밀번호" required class="form-control mb-2">
+            <div class="d-flex justify-content-between">
+                <button type="submit" th:formaction="@{/boards/article/{id}/updateavil(id=${board.id})}" class="btn btn-success">수정</button>
+                <button type="submit" th:formaction="@{/boards/article/{id}/delete(id=${board.id})}" class="btn btn-danger">삭제</button>
+            </div>
+        </form>
+    </div>
+
+    <a href="http://localhost:8080/boards/article/all" class="btn btn-primary mt-4">전체 게시물 보기</a>
+
+    <div class="mt-4">
+        <h3>댓글</h3>
+        <div class="list-group">
+            <th:block th:each="comment : ${comments}">
+                <div class="list-group-item">
+                    <div th:text="${comment.text}">댓글 내용</div>
+                    <form th:action="@{/boards/article/{boardId}/comment/{commentId}/delete(boardId=${board.id}, commentId=${comment.id})}" method="post" class="mt-2">
+                        <input type="password" name="password" placeholder="비밀번호" required class="form-control mb-2">
+                        <button type="submit" class="btn btn-danger">댓글 삭제</button>
+                    </form>
+                </div>
+            </th:block>
+        </div>
+        <form th:action="@{/boards/article/{id}/comment(id=${board.id})}" method="post" class="mt-4">
+            <textarea name="text" placeholder="댓글을 입력하세요" required class="form-control mb-2"></textarea>
+            <input type="password" name="password" placeholder="비밀번호" required class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">댓글 작성</button>
+        </form>
+    </div>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
